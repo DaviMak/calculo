@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -37,6 +38,9 @@ public class Venda {
     @JsonIgnoreProperties("vendas")
     @NotNull(message = "Venda sem funcionário associado!")
     private Funcionario funcionario;
+    
+    @NotBlank
+    private String Status;
     
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable

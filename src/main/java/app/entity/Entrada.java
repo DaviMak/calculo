@@ -1,13 +1,13 @@
 package app.entity;
 
+
+
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+//import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class Entrada {
 	
 	private List<Integer> numeros;

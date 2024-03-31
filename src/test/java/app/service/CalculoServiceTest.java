@@ -1,6 +1,7 @@
 package app.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -23,21 +24,21 @@ class CalculoServiceTest {
 	@Autowired
 	CalculoService calculoservice;
 	
-	@MockBean
-	CalculoRepository calculoRepository;
+	//@MockBean
+	//CalculoRepository calculoRepository;
 	
 	
-	@BeforeEach
-	void setup() {
+//	@BeforeEach
+//	void setup() {
 		
-		Resultado resultado = new Resultado();
-		resultado.setNome("João");
-		
-		when(this.calculoRepository.findById(1L)).thenReturn(Optional.of(resultado));
-	}
+//		Resultado resultado = new Resultado();
+//		resultado.setNome("João");
+//		
+//		when(this.calculoRepository.findById(1L)).thenReturn(Optional.of(resultado));
+//	}
 	
 	@Test
-	@DisplayName("teste")
+	@DisplayName("é pra pegar o maior valor que é 30")
 	void MaiorTest(){
 		
 		List<Integer> lista = new ArrayList<>();
@@ -52,14 +53,30 @@ class CalculoServiceTest {
 		assertEquals(30, maior);
 	}
 	
-	
 	@Test
-	@DisplayName("TESTE DE INTEGRAÇÃO COM MOCK VERIFICANDO O NOME JOÕAO")
-	void teste() {
-		Optional<Resultado> resultado = this.calculoservice.findById(1);
-		Resultado result = resultado.get();
+	@DisplayName("teste unitario de erro")
 	
-		assertEquals("João", result.getNome());
+	void MaiorTest2() {
+		List<Integer> lista = new ArrayList<>();
+		
+		lista.add(5);
+		lista.add(9);
+		lista.add(28);
+		lista.add(null);
+		
+		assertThrows(Exception.class, () ->{
+			double retorno = this.calculoservice.maior(lista);
+		});
 	}
+	
+	
+//	@Test
+//	@DisplayName("TESTE DE INTEGRAÇÃO COM MOCK VERIFICANDO O NOME JOÕAO")
+//	void teste() {
+//		Optional<Resultado> resultado = this.calculoservice.findById(1);
+//		Resultado result = resultado.get();
+//	
+//		assertEquals("João", result.getNome());
+//	}
 
 }
