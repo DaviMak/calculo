@@ -1,5 +1,6 @@
 package app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,11 @@ public class VendaService {
 		private VendaRepository repository;
 		
 		public String save(Venda obj) {
-			
-			double valorTotal = this.calcularValorTotal(obj.getProdutos());
-			obj.setValorTotal(valorTotal);
+			obj.setValorTotal(this.calcularValorTotal(obj.getProdutos()));
 			
 			this.repository.save(obj);
 			return "Venda salva com sucesso.";
 		}
-		@NotBlank
-		private String status;
-		
 		
 		public List<Venda> listAll(){
 			return this.repository.findAll();
@@ -35,7 +31,8 @@ public class VendaService {
 		
 		public String update(long id, Venda obj) {
 			obj.setId(id);
-			setTotalVenda(obj);
+			obj = this.verificarStatus(obj);
+			obj.setValorTotal(this.calcularValorTotal(obj.getProdutos()));
 			this.repository.save(obj);
 			return "Sucesso!";
 		}
@@ -67,28 +64,20 @@ public class VendaService {
 			return this.repository.findByEnderecoEntrega(endereco);
 		}
 		
-		
-		private void setTotalVenda(Venda obj) {
-			List<Produto> produtos = obj.getProdutos();
-			
-			double totalVenda = 0.0;
-			
-			for (Produto produto : produtos) {
-	            totalVenda += produto.getValor(); 
-	        }
-			
-			obj.setValorTotal(totalVenda);
-		}
-		
 		public double calcularValorTotal(List<Produto> produto) {
 			double soma = 0;
-			if(produto != null) {
-				for(int i=0; i<produto.size();i++) {
-					soma += produto.get(i).getValor();
-				}
-				
+			
+			for(int i=0; i<produto.size();i++) {
+				soma += produto.get(i).getValor();
 			}
+			
 			return soma;
-			//return this.calcularValorTotal(produto);
+		}
+		
+		public Venda verificarStatus(Venda obj) {
+			if(obj.getStatus().equals("Cancelado"))
+				obj.setProdutos(new ArrayList<>());
+				
+			return obj;
 		}
 	}

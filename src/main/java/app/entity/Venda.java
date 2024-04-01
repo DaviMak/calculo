@@ -40,7 +40,7 @@ public class Venda {
     private Funcionario funcionario;
     
     @NotBlank
-    private String Status;
+    private String status;
     
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable
@@ -89,5 +89,10 @@ public class Venda {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }
