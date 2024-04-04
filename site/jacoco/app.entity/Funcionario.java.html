@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Funcionario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">App</a> &gt; <a href="index.source.html" class="el_package">app.entity</a> &gt; <span class="el_source">Funcionario.java</span></div><h1>Funcionario.java</h1><pre class="source lang-java linenums">package app.entity;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+@Entity
+<span class="fc" id="L17">public class Funcionario {</span>
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @NotBlank(message = &quot;Informe o Nome do Funcionário!&quot;)
+    private String nome;
+    @NotNull(message = &quot;Informe a Idade do Funcionário!&quot;)
+    private int idade;
+    @NotBlank(message = &quot;Informe a Matrícula do Funcionário!&quot;)
+    private String matricula;
+    
+    @OneToMany(mappedBy = &quot;funcionario&quot;, cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List&lt;Venda&gt; vendas;
+    
+	public Long getId() {
+<span class="nc" id="L34">		return id;</span>
+	}
+	public List&lt;Venda&gt; getVendas() {
+<span class="nc" id="L37">		return vendas;</span>
+	}
+	public void setVendas(List&lt;Venda&gt; vendas) {
+<span class="nc" id="L40">		this.vendas = vendas;</span>
+<span class="nc" id="L41">	}</span>
+	public void setId(Long id) {
+<span class="fc" id="L43">		this.id = id;</span>
+<span class="fc" id="L44">	}</span>
+	public String getNome() {
+<span class="nc" id="L46">		return nome;</span>
+	}
+	public void setNome(String nome) {
+<span class="fc" id="L49">		this.nome = nome;</span>
+<span class="fc" id="L50">	}</span>
+	public int getIdade() {
+<span class="nc" id="L52">		return idade;</span>
+	}
+	public void setIdade(int idade) {
+<span class="fc" id="L55">		this.idade = idade;</span>
+<span class="fc" id="L56">	}</span>
+	public String getMatricula() {
+<span class="nc" id="L58">		return matricula;</span>
+	}
+	public void setMatricula(String matricula) {
+<span class="fc" id="L61">		this.matricula = matricula;</span>
+<span class="fc" id="L62">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Venda.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">App</a> &gt; <a href="index.source.html" class="el_package">app.entity</a> &gt; <span class="el_source">Venda.java</span></div><h1>Venda.java</h1><pre class="source lang-java linenums">package app.entity;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+@Entity
+<span class="fc" id="L20">public class Venda {</span>
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String enderecoEntrega;
+    
+    @NotNull(message = &quot;Informe o Valor Total!&quot;)
+    private double valorTotal;
+    
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = &quot;cliente_id&quot;)
+    @JsonIgnoreProperties(&quot;vendas&quot;)
+    @NotNull(message = &quot;Venda sem cliente associado!&quot;)
+    private Cliente cliente;
+    
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = &quot;funcionario_id&quot;)
+    @JsonIgnoreProperties(&quot;vendas&quot;)
+    @NotNull(message = &quot;Venda sem funcionário associado!&quot;)
+    private Funcionario funcionario;
+    
+    @NotBlank
+    private String status;
+    
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable
+    (
+        name = &quot;venda_produto&quot;,
+        joinColumns = @JoinColumn(name = &quot;venda_id&quot;),
+        inverseJoinColumns = @JoinColumn(name = &quot;produto_id&quot;)
+    )
+    @NotNull(message = &quot;Venda sem produtos adicionados!&quot;)
+    @JsonIgnoreProperties(&quot;vendas&quot;)
+    private List&lt;Produto&gt; produtos;
+    
+	public Long getId() {
+<span class="nc" id="L57">		return id;</span>
+	}
+	public Funcionario getFuncionario() {
+<span class="nc" id="L60">		return funcionario;</span>
+	}
+	public void setFuncionario(Funcionario funcionario) {
+<span class="fc" id="L63">		this.funcionario = funcionario;</span>
+<span class="fc" id="L64">	}</span>
+	public List&lt;Produto&gt; getProdutos() {
+<span class="fc" id="L66">		return produtos;</span>
+	}
+	public void setProdutos(List&lt;Produto&gt; produtos) {
+<span class="fc" id="L69">		this.produtos = produtos;</span>
+<span class="fc" id="L70">	}</span>
+	public void setId(Long id) {
+<span class="fc" id="L72">		this.id = id;</span>
+<span class="fc" id="L73">	}</span>
+	public String getEnderecoEntrega() {
+<span class="nc" id="L75">		return enderecoEntrega;</span>
+	}
+	public void setEnderecoEntrega(String enderecoEntrega) {
+<span class="nc" id="L78">		this.enderecoEntrega = enderecoEntrega;</span>
+<span class="nc" id="L79">	}</span>
+	public double getValorTotal() {
+<span class="fc" id="L81">		return valorTotal;</span>
+	}
+	public void setValorTotal(double valorTotal) {
+<span class="fc" id="L84">		this.valorTotal = valorTotal;</span>
+<span class="fc" id="L85">	}</span>
+	public Cliente getCliente() {
+<span class="nc" id="L87">		return this.cliente;</span>
+	}
+	public void setCliente(Cliente cliente) {
+<span class="fc" id="L90">		this.cliente = cliente;</span>
+<span class="fc" id="L91">	}</span>
+	public String getStatus() {
+<span class="fc" id="L93">		return status;</span>
+	}
+	public void setStatus(String status) {
+<span class="fc" id="L96">		this.status = status;</span>
+<span class="fc" id="L97">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

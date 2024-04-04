@@ -34,7 +34,7 @@ public class VendaControllerTest {
 	
 	@BeforeEach
 	void setup() {
-		List<Venda> list = new ArrayList();
+		List<Venda> list = new ArrayList<Venda>();
 		List<Produto> listProd = new ArrayList<>();
 		
 		Venda venda = new Venda();

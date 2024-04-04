@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClienteService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">App</a> &gt; <a href="index.source.html" class="el_package">app.service</a> &gt; <span class="el_source">ClienteService.java</span></div><h1>ClienteService.java</h1><pre class="source lang-java linenums">package app.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import app.entity.Cliente;
+import app.repository.ClienteRepository;
+
+@Service
+<span class="fc" id="L12">public class ClienteService {</span>
+	
+		@Autowired
+		private ClienteRepository repository;
+		
+		public String save(Cliente obj) {
+<span class="fc" id="L18">			this.repository.save(obj);</span>
+<span class="fc" id="L19">			return obj.getNome() + &quot; Cliente salvo com sucesso.&quot;;</span>
+		}
+		
+		public List&lt;Cliente&gt; listAll(){
+<span class="fc" id="L23">			return this.repository.findAll();</span>
+		}
+		
+		public String update(long id, Cliente obj) {
+<span class="fc" id="L27">			obj.setId(id);</span>
+<span class="fc" id="L28">			this.repository.save(obj);</span>
+<span class="fc" id="L29">			return &quot;Sucesso!&quot;;</span>
+		}
+		
+		public Cliente findById(long id) {
+<span class="fc" id="L33">			Cliente obj = this.repository.findById(id).get();</span>
+<span class="fc" id="L34">			return obj;</span>
+		}
+		
+		public String delete(long id) {
+<span class="fc" id="L38">			this.repository.deleteById(id);</span>
+<span class="fc" id="L39">			return &quot;Sucesso!&quot;;</span>
+		}
+		
+		public List&lt;Cliente&gt; findByNome(String nome){
+<span class="fc" id="L43">			return this.repository.findByNome(nome);</span>
+		}
+		
+		public List&lt;Cliente&gt; findByCpf(String cpf){
+<span class="fc" id="L47">			return this.repository.findByCpf(cpf);</span>
+		}
+		
+		public List&lt;Cliente&gt; findOlderClient(int idade){
+<span class="fc" id="L51">			return this.repository.findOlderClient(idade);</span>
+		}
+	}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
